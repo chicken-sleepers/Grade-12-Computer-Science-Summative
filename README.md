@@ -6,7 +6,7 @@
 - Jayson Liao
 - Taha Ali
 
-**Repository Description**
+**Repository Description -**
 In this repository the project will be stored and constantly updated consisting of:
 - Project Proposal & Group Member Assignments
 - Timelines
