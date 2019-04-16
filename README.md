@@ -1,6 +1,7 @@
 # Grade 12 Computer Science Summative
 
-**Group Members**
+**Group Members -**
+Group Members participating in this project:
 - Asad Bhatti
 - Daniel Buwah
 - Jayson Liao
