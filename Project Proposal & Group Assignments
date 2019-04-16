@@ -1,8 +1,0 @@
-# Project Proposal
-**The intention is to create a player vs player game that consists of a story mode and multiple characters**
-| Group Member | Language | Assignment |
-|:---:|:---:|:---|
-| A.B. | Python, Pygame | Create the gameplay, user-interface, and visuals for the game |
-| D.B. | HTML | Create the website for the game consisting of a main game page, "About Characters" page, "Storyline" page, etc. |
-| J.L. | Python, Pygame | Assist with the creation of gameplay, user interface, and visuals for the game |
-| T.A. | Python, Pygame | Create storyline for the game and create animations |
