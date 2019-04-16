@@ -9,7 +9,8 @@ Group Members participating in this project:
 
 **Repository Description -**
 In this repository the project will be stored and constantly updated consisting of:
-- Project Proposal & Group Member Assignments
-- Timelines
 - Website Links
 - Python Game
+
+**More Details on the Group Assignment can be found in the Wiki -**
+- Project Proposal & Group Assignments
