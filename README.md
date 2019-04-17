@@ -11,6 +11,7 @@ Group Members participating in this project:
 In this repository the project will be stored and constantly updated consisting of:
 - Website Links
 - Python Game
+- Gantt Chart
 
 **More Details on the Group Assignment can be found in the Wiki -**
 - Project Proposal & Group Assignments
