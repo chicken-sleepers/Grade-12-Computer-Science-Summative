@@ -15,3 +15,5 @@ In this repository the project will be stored and constantly updated consisting 
 
 **More Details on the Group Assignment can be found in the Wiki -**
 - Project Proposal & Group Assignments
+
+![Gantt Diagram](https://github.com/chicken-sleepers/Grade-12-Computer-Science-Summative/blob/master/Gantt%20Chart.JPG)
