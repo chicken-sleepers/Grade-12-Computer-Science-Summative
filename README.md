@@ -10,8 +10,8 @@ Group Members participating in this project:
 **Repository Description -**
 In this repository the project will be stored and constantly updated consisting of:
 - Website Links
- - Main website link
- - (Insert link here)
+  - Main website link
+  - (Insert link here)
 - Python Game
   - Sprites
   - Music
