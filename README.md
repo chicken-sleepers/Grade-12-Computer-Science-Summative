@@ -10,7 +10,13 @@ Group Members participating in this project:
 **Repository Description -**
 In this repository the project will be stored and constantly updated consisting of:
 - Website Links
+ - Main website link
+ - (Insert link here)
 - Python Game
+  - Sprites
+  - Music
+  - Backgrounds
+  - Game code
 - Gantt Chart
 
 **More Details on the Group Assignment can be found in the Wiki -**
