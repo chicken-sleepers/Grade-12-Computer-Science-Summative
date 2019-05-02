@@ -1,5 +1,7 @@
+#_________________________________________________________________Libraries_________________________________________________________________#
 import pygame
 
+#_____________________________________________________________Display Settings______________________________________________________________#
 pygame.init()
 
 display_width = 1200
@@ -9,12 +11,7 @@ black = (0,0,0)
 white = (255,255,255)
 red = (255,0,0)
 
-x = 0
-y = 0
-graphics = 0
-player_height = 260
-player_width = 218
-
+#_______________________________________________________________Image/Music_________________________________________________________________#
 gameDisplay = pygame.display.set_mode((display_width,display_height))
 pygame.display.set_caption('Chicken Slayer Z')
 clock = pygame.time.Clock()
@@ -28,12 +25,20 @@ playercharge = pygame.image.load('tahacharge.png')
 playershoot = pygame.image.load('tahashoot.png')
 energyblast = pygame.image.load('energyblast.png')
 
+#___________________________________________________________PreAssigned Variables____________________________________________________________#
+x = 0
+y = 0
+graphics = 0
+player_height = 260
+player_width = 218
+
 blastspeed = 15
 blastx = 0
 blasty = 0
 blastwidth = 142
 blastheight = 56
 
+#_________________________________________________________________Image Functions____________________________________________________________#
 def player_stand(x,y):
     gameDisplay.blit(playerstand,(x,y))
     
@@ -58,6 +63,7 @@ def player_shoot(x,y):
 def energy_blast(x,y):
     gameDisplay.blit(energyblast, (x,y))
 
+#_________________________________________________________________Game Function______________________________________________________________#
 def game(graphics, blastx, blasty, blastspeed):
     x = (display_width * 0.10)
     y = (display_height * 0.30)
@@ -67,12 +73,14 @@ def game(graphics, blastx, blasty, blastspeed):
 
     exit_game = False
 
+#-------------------------------------------------------------------Game Loop----------------------------------------------------------------#
     while not exit_game:
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 exit_game = True
-
+                
+#|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||KeyBoard Controls||||||||||||||||||||||||||||||||||||||||||||||||||||||||||#
             if event.type == pygame.KEYDOWN:
                 if event.key == ord('a'):
                     x_change = -10
@@ -99,6 +107,7 @@ def game(graphics, blastx, blasty, blastspeed):
                 if event.key == ord(' '):
                     graphics = 6
 
+#||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||Display Control|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||#
         x += x_change
         y += y_change
 
@@ -138,6 +147,8 @@ def game(graphics, blastx, blasty, blastspeed):
         pygame.display.update()
 
         clock.tick(60)
+
+#______________________________________________________________Program Output_____________________________________________________________#
 while True:
     game(graphics,blastx, blasty, blastspeed)
     pygame.quit()
