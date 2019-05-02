@@ -9,6 +9,8 @@ black = (0,0,0)
 white = (255,255,255)
 red = (255,0,0)
 
+x = 0
+y = 0
 graphics = 0
 player_height = 260
 player_width = 218
@@ -24,6 +26,13 @@ playerjump = pygame.image.load('tahajump.png')
 playercrouch = pygame.image.load('tahacrouch.png')
 playercharge = pygame.image.load('tahacharge.png')
 playershoot = pygame.image.load('tahashoot.png')
+energyblast = pygame.image.load('energyblast.png')
+
+blastspeed = 15
+blastx = 0
+blasty = 0
+blastwidth = 142
+blastheight = 56
 
 def player_stand(x,y):
     gameDisplay.blit(playerstand,(x,y))
@@ -46,20 +55,23 @@ def player_charge(x,y):
 def player_shoot(x,y):
     gameDisplay.blit(playershoot, (x,y))
 
-def game(graphics):
+def energy_blast(x,y):
+    gameDisplay.blit(energyblast, (x,y))
+
+def game(graphics, blastx, blasty, blastspeed):
     x = (display_width * 0.10)
     y = (display_height * 0.30)
 
     x_change = 0
     y_change = 0
 
-    crashed = False
+    exit_game = False
 
-    while not crashed:
+    while not exit_game:
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                crashed = True
+                exit_game = True
 
             if event.type == pygame.KEYDOWN:
                 if event.key == ord('a'):
@@ -116,12 +128,17 @@ def game(graphics):
             player_charge(x,y)
         elif graphics == 6:
             player_shoot(x,y)
+            blastx = (x+232)
+            blasty = (y+63)
             graphics = 0
             
+        energy_blast(blastx,blasty)
+        blastx += blastspeed
+        
         pygame.display.update()
 
         clock.tick(60)
 while True:
-    game(graphics)
+    game(graphics,blastx, blasty, blastspeed)
     pygame.quit()
     quit()
