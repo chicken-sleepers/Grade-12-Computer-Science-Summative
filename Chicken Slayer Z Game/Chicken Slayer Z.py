@@ -22,6 +22,8 @@ playerright = pygame.image.load('taharight.png')
 playerleft = pygame.image.load('tahaleft.png')
 playerjump = pygame.image.load('tahajump.png')
 playercrouch = pygame.image.load('tahacrouch.png')
+playercharge = pygame.image.load('tahacharge.png')
+playershoot = pygame.image.load('tahashoot.png')
 
 def player_stand(x,y):
     gameDisplay.blit(playerstand,(x,y))
@@ -37,6 +39,12 @@ def player_jump(x,y):
 
 def player_crouch(x,y):
     gameDisplay.blit(playercrouch,(x,y))
+
+def player_charge(x,y):
+    gameDisplay.blit(playercharge, (x,y))
+
+def player_shoot(x,y):
+    gameDisplay.blit(playershoot, (x,y))
 
 def game(graphics):
     x = (display_width * 0.10)
@@ -66,6 +74,8 @@ def game(graphics):
                 elif event.key == ord('s'):
                     y_change = 10
                     graphics = 4
+                elif event.key == ord(' '):
+                    graphics = 5
 
             if event.type == pygame.KEYUP:
                 if event.key == ord('a') or event.key == ord('d'):
@@ -74,6 +84,8 @@ def game(graphics):
                 if event.key == ord('w') or event.key == ord('s'):
                     y_change = 0
                     graphics = 0
+                if event.key == ord(' '):
+                    graphics = 6
 
         x += x_change
         y += y_change
@@ -100,6 +112,11 @@ def game(graphics):
             player_jump(x,y)
         elif graphics == 4:
             player_crouch(x,y)
+        elif graphics == 5:
+            player_charge(x,y)
+        elif graphics == 6:
+            player_shoot(x,y)
+            graphics = 0
             
         pygame.display.update()
 
