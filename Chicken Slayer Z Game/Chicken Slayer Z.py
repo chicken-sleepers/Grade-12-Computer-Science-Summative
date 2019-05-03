@@ -16,7 +16,7 @@ gameDisplay = pygame.display.set_mode((display_width,display_height))
 pygame.display.set_caption('Chicken Slayer Z')
 clock = pygame.time.Clock()
 
-#****************************************************************Player*********************************************************************#
+#**************************************************************Player Image*****************************************************************#
 playerstand = pygame.image.load('tahastand.png')
 playerright = pygame.image.load('taharight.png')
 playerleft = pygame.image.load('tahaleft.png')
@@ -26,9 +26,11 @@ playercharge = pygame.image.load('tahacharge.png')
 playershoot = pygame.image.load('tahashoot.png')
 energyblast = pygame.image.load('energyblast.png')
 
-#****************************************************************Enemy**********************************************************************#
+#**************************************************************Enemy Image*******************************************************************#
 chickenboss = pygame.image.load('asadboss.png')
 
+#**************************************************************Crash Music*******************************************************************#
+bombsound = pygame.mixer.Sound('Bomb_crash.wav')
 
 #___________________________________________________________PreAssigned Variables____________________________________________________________#
 x = 0
@@ -37,7 +39,7 @@ graphics = 0
 player_height = 260
 player_width = 218
 
-blastspeed = 20
+blastspeed = 40
 blastx = 0
 blasty = 0
 blastwidth = 142
@@ -76,6 +78,11 @@ def energy_blast(x,y):
 
 def boss(x,y):
     gameDisplay.blit(chickenboss, (x,y))
+
+def crash(sound):
+    pygame.mixer.music.stop()
+    pygame.mixer.Sound.play(sound)
+    pygame.mixer.music.stop()
 
 #_________________________________________________________________Game Function______________________________________________________________#
 def game(graphics, blastx, blasty, blastspeed, bossx, bossy, bossspeed):
@@ -165,6 +172,11 @@ def game(graphics, blastx, blasty, blastspeed, bossx, bossy, bossspeed):
             bossspeed = -15
         if bossy < 0:
             bossspeed = 15
+
+        if bossx < blastx + blastwidth:
+            if bossy > blasty and bossy < blasty + blastwidth or bossy + boss_width > blasty and bossy + boss_width < blasty + blastwidth:
+                blasty = 1450
+                
         
         pygame.display.update()
 
