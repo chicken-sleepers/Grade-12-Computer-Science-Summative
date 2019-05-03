@@ -4,7 +4,7 @@ import pygame
 #_____________________________________________________________Display Settings______________________________________________________________#
 pygame.init()
 
-display_width = 1200
+display_width = 1400
 display_height = 700
 
 black = (0,0,0)
@@ -16,6 +16,7 @@ gameDisplay = pygame.display.set_mode((display_width,display_height))
 pygame.display.set_caption('Chicken Slayer Z')
 clock = pygame.time.Clock()
 
+#****************************************************************Player*********************************************************************#
 playerstand = pygame.image.load('tahastand.png')
 playerright = pygame.image.load('taharight.png')
 playerleft = pygame.image.load('tahaleft.png')
@@ -25,6 +26,10 @@ playercharge = pygame.image.load('tahacharge.png')
 playershoot = pygame.image.load('tahashoot.png')
 energyblast = pygame.image.load('energyblast.png')
 
+#****************************************************************Enemy**********************************************************************#
+chickenboss = pygame.image.load('asadboss.png')
+
+
 #___________________________________________________________PreAssigned Variables____________________________________________________________#
 x = 0
 y = 0
@@ -32,11 +37,17 @@ graphics = 0
 player_height = 260
 player_width = 218
 
-blastspeed = 15
+blastspeed = 20
 blastx = 0
 blasty = 0
 blastwidth = 142
 blastheight = 56
+
+boss_height = 300
+boss_width = 333
+bossx = (display_width - boss_width)
+bossy = 0
+bossspeed = 15
 
 #_________________________________________________________________Image Functions____________________________________________________________#
 def player_stand(x,y):
@@ -63,8 +74,11 @@ def player_shoot(x,y):
 def energy_blast(x,y):
     gameDisplay.blit(energyblast, (x,y))
 
+def boss(x,y):
+    gameDisplay.blit(chickenboss, (x,y))
+
 #_________________________________________________________________Game Function______________________________________________________________#
-def game(graphics, blastx, blasty, blastspeed):
+def game(graphics, blastx, blasty, blastspeed, bossx, bossy, bossspeed):
     x = (display_width * 0.10)
     y = (display_height * 0.30)
 
@@ -143,6 +157,14 @@ def game(graphics, blastx, blasty, blastspeed):
             
         energy_blast(blastx,blasty)
         blastx += blastspeed
+
+        boss(bossx,bossy)
+        bossy += bossspeed
+
+        if bossy > 400:
+            bossspeed = -15
+        if bossy < 0:
+            bossspeed = 15
         
         pygame.display.update()
 
@@ -150,6 +172,6 @@ def game(graphics, blastx, blasty, blastspeed):
 
 #______________________________________________________________Program Output_____________________________________________________________#
 while True:
-    game(graphics,blastx, blasty, blastspeed)
+    game(graphics,blastx, blasty, blastspeed, bossx, bossy, bossspeed)
     pygame.quit()
     quit()
