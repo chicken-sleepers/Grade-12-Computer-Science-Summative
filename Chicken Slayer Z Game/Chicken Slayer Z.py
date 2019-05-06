@@ -28,6 +28,7 @@ energyblast = pygame.image.load('energyblast.png')
 
 #**************************************************************Enemy Image*******************************************************************#
 chickenboss = pygame.image.load('asadboss.png')
+bossshoot = pygame.image.load('eggblast.png')
 
 #**************************************************************Crash Music*******************************************************************#
 bombsound = pygame.mixer.Sound('Bomb_crash.wav')
@@ -50,6 +51,12 @@ boss_width = 333
 bossx = (display_width - boss_width)
 bossy = 0
 bossspeed = 15
+
+eggwidth = 61
+eggheight = 46
+eggx = (display_width - boss_width - eggwidth)
+eggy = 0
+eggspeed = 20
 
 #_________________________________________________________________Image Functions____________________________________________________________#
 def player_stand(x,y):
@@ -79,13 +86,11 @@ def energy_blast(x,y):
 def boss(x,y):
     gameDisplay.blit(chickenboss, (x,y))
 
-def crash(sound):
-    pygame.mixer.music.stop()
-    pygame.mixer.Sound.play(sound)
-    pygame.mixer.music.stop()
+def boss_shoot(x,y):
+    gameDisplay.blit(bossshoot, (x,y))
 
 #_________________________________________________________________Game Function______________________________________________________________#
-def game(graphics, blastx, blasty, blastspeed, bossx, bossy, bossspeed):
+def game(graphics, blastx, blasty, blastspeed, bossx, bossy, bossspeed, eggx, eggy, eggspeed):
     x = (display_width * 0.10)
     y = (display_height * 0.30)
 
@@ -100,7 +105,7 @@ def game(graphics, blastx, blasty, blastspeed, bossx, bossy, bossspeed):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 exit_game = True
-                
+
 #|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||KeyBoard Controls||||||||||||||||||||||||||||||||||||||||||||||||||||||||||#
             if event.type == pygame.KEYDOWN:
                 if event.key == ord('a'):
@@ -157,9 +162,9 @@ def game(graphics, blastx, blasty, blastspeed, bossx, bossy, bossspeed):
         elif graphics == 5:
             player_charge(x,y)
         elif graphics == 6:
-            player_shoot(x,y)
             blastx = (x+232)
             blasty = (y+63)
+            player_shoot(x,y)
             graphics = 0
             
         energy_blast(blastx,blasty)
@@ -173,10 +178,21 @@ def game(graphics, blastx, blasty, blastspeed, bossx, bossy, bossspeed):
         if bossy < 0:
             bossspeed = 15
 
+        eggy = (bossy + 100)
+        boss_shoot(eggx,eggy)
+        eggx -= eggspeed
+
+        if eggx < 0:
+            eggx = (display_width - boss_width - eggwidth)
+
         if bossx < blastx + blastwidth:
             if bossy > blasty and bossy < blasty + blastwidth or bossy + boss_width > blasty and bossy + boss_width < blasty + blastwidth:
                 blasty = 1450
-                
+""" Please Fix collision
+        if x > eggx + eggwidth:
+            if y > eggy and y < eggy + eggwidth or y + player_width > eggy and y + player_width < eggy + eggwidth:
+                eggy = 1450
+"""        
         
         pygame.display.update()
 
@@ -184,6 +200,6 @@ def game(graphics, blastx, blasty, blastspeed, bossx, bossy, bossspeed):
 
 #______________________________________________________________Program Output_____________________________________________________________#
 while True:
-    game(graphics,blastx, blasty, blastspeed, bossx, bossy, bossspeed)
+    game(graphics,blastx, blasty, blastspeed, bossx, bossy, bossspeed, eggx, eggy, eggspeed)
     pygame.quit()
     quit()
