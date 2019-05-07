@@ -186,13 +186,12 @@ def game(graphics, blastx, blasty, blastspeed, bossx, bossy, bossspeed, eggx, eg
             eggx = (display_width - boss_width - eggwidth)
 
         if bossx < blastx + blastwidth:
-            if bossy > blasty and bossy < blasty + blastwidth or bossy + boss_width > blasty and bossy + boss_width < blasty + blastwidth:
+            if bossy > blasty and bossy < blasty + blastheight or bossy + boss_height > blasty and bossy + boss_height < blasty + blastheight:
                 blasty = 1450
-""" Please Fix collision
-        if x > eggx + eggwidth:
-            if y > eggy and y < eggy + eggwidth or y + player_width > eggy and y + player_width < eggy + eggwidth:
+ 
+        if x > eggx:
+            if y > eggy and y < eggy + eggheight or y + player_height > eggy and y + player_height < eggy + eggheight:
                 eggy = 1450
-"""        
         
         pygame.display.update()
 
