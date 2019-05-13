@@ -1,5 +1,5 @@
 #_________________________________________________________________Libraries_________________________________________________________________#
-import pygame
+import pygame,random,sys,time,os
 
 #_____________________________________________________________Display Settings______________________________________________________________#
 pygame.init()
@@ -56,7 +56,10 @@ eggwidth = 61
 eggheight = 46
 eggx = (display_width - boss_width - eggwidth)
 eggy = 0
-eggspeed = 20
+eggspeed = 10
+
+plife = 100
+blife = 11
 
 #_________________________________________________________________Image Functions____________________________________________________________#
 def player_stand(x,y):
@@ -89,8 +92,48 @@ def boss(x,y):
 def boss_shoot(x,y):
     gameDisplay.blit(bossshoot, (x,y))
 
+#_____________________________________________________________Interface Functions____________________________________________________________#
+def text_objects(text, font):
+    textSurface = font.render(text, True, red)
+    return textSurface, textSurface.get_rect()
+
+def display_message(message,x,y):
+    Largetext = pygame.font.SysFont("comicsansbold", 60)
+    TextSurf, TextRect = text_objects(message, Largetext)
+    TextRect.center = (x, y)
+    gameDisplay.blit(TextSurf, TextRect)
+    pygame.display.update()
+    time.sleep(0.1)
+
+def message(message):
+    Largetext = pygame.font.SysFont("comicsansms", 30)
+    TextSurf, TextRect = text_objects(message, Largetext)
+    TextRect.center = ((display_width/2), (display_height/2))
+    gameDisplay.blit(TextSurf, TextRect)
+    pygame.display.update()
+    time.sleep(0.1)
+
+def lifepoints(life, width, height):
+    font = pygame.font.SysFont("comicsansms", 25)
+    text=font.render('Health: '+str(life),True,red)
+    gameDisplay.blit(text,(width, height))
+
+def win():
+    gameDisplay.fill(white)
+    display_message('Level Complete!',700,100)
+    message('YOU WIN!!!')
+    time.sleep(4)
+
+def lose():
+    gameDisplay.fill(white)
+    display_message('Level Failed!',700,100)
+    message('YOU LOSE!!!')
+    time.sleep(4)
+    
 #_________________________________________________________________Game Function______________________________________________________________#
-def game(graphics, blastx, blasty, blastspeed, bossx, bossy, bossspeed, eggx, eggy, eggspeed):
+def game(display_width, graphics, plife, blife, player_width, blastx, blasty, blastspeed, boss_width, bossx, bossy, bossspeed, eggx, eggy, eggspeed):
+    
+#-------------------------------------------------------Preassigned Game Loop Variables------------------------------------------------------#
     x = (display_width * 0.10)
     y = (display_height * 0.30)
 
@@ -139,8 +182,8 @@ def game(graphics, blastx, blasty, blastspeed, bossx, bossy, bossspeed, eggx, eg
 
         if x < 0:
             x = 0
-        elif x > (display_width*0.5) - player_width:
-            x = (display_width*0.5) - player_width
+        elif x > (display_width*0.4) - player_width:
+            x = (display_width*0.4) - player_width
 
         if y < 0:
             y = 0
@@ -188,10 +231,24 @@ def game(graphics, blastx, blasty, blastspeed, bossx, bossy, bossspeed, eggx, eg
         if bossx < blastx + blastwidth:
             if bossy > blasty and bossy < blasty + blastheight or bossy + boss_height > blasty and bossy + boss_height < blasty + blastheight:
                 blasty = 1450
+                blife -= 1
+                if blife <= 0:
+                    win()
+                    pygame.quit()
+                    quit()
  
-        if x > eggx:
+        if x + player_width > eggx:
             if y > eggy and y < eggy + eggheight or y + player_height > eggy and y + player_height < eggy + eggheight:
-                eggy = 1450
+                eggx = (display_width - boss_width)
+                plife -= 1
+                if plife <= 0:
+                    lose()
+                    pygame.quit()
+                    quit()
+                    
+
+        lifepoints(plife, 20, 10)
+        lifepoints(blife, 1275, 650)
         
         pygame.display.update()
 
@@ -199,6 +256,6 @@ def game(graphics, blastx, blasty, blastspeed, bossx, bossy, bossspeed, eggx, eg
 
 #______________________________________________________________Program Output_____________________________________________________________#
 while True:
-    game(graphics,blastx, blasty, blastspeed, bossx, bossy, bossspeed, eggx, eggy, eggspeed)
+    game(display_width, graphics, plife, blife, player_width, blastx, blasty, blastspeed, boss_width, bossx, bossy, bossspeed, eggx, eggy, eggspeed)
     pygame.quit()
     quit()
