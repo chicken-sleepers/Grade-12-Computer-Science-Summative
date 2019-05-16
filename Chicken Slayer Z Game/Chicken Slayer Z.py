@@ -10,6 +10,8 @@ display_height = 700
 black = (0,0,0)
 white = (255,255,255)
 red = (255,0,0)
+green = (0,255,0)
+blue = (0,0,255)
 
 #_______________________________________________________________Image/Music_________________________________________________________________#
 gameDisplay = pygame.display.set_mode((display_width,display_height))
@@ -25,6 +27,7 @@ playercrouch = pygame.image.load('tahacrouch.png')
 playercharge = pygame.image.load('tahacharge.png')
 playershoot = pygame.image.load('tahashoot.png')
 energyblast = pygame.image.load('energyblast.png')
+stageimage = pygame.image.load('Backgrounds\stageone.png')
 
 #**************************************************************Enemy Image*******************************************************************#
 chickenboss = pygame.image.load('asadboss.png')
@@ -40,7 +43,7 @@ graphics = 0
 player_height = 260
 player_width = 218
 
-blastspeed = 40
+blastspeed = 80
 blastx = 0
 blasty = 0
 blastwidth = 142
@@ -56,9 +59,9 @@ eggwidth = 61
 eggheight = 46
 eggx = (display_width - boss_width - eggwidth)
 eggy = 0
-eggspeed = 10
+eggspeed = 20
 
-plife = 100
+plife = 10
 blife = 11
 
 #_________________________________________________________________Image Functions____________________________________________________________#
@@ -92,6 +95,9 @@ def boss(x,y):
 def boss_shoot(x,y):
     gameDisplay.blit(bossshoot, (x,y))
 
+def stage_background(x,y):
+    gameDisplay.blit(stageimage, (x,y))
+
 #_____________________________________________________________Interface Functions____________________________________________________________#
 def text_objects(text, font):
     textSurface = font.render(text, True, red)
@@ -113,9 +119,9 @@ def message(message):
     pygame.display.update()
     time.sleep(0.1)
 
-def lifepoints(life, width, height):
+def lifepoints(life, width, height, colour):
     font = pygame.font.SysFont("comicsansms", 25)
-    text=font.render('Health: '+str(life),True,red)
+    text=font.render('Health: '+str(life),True,colour)
     gameDisplay.blit(text,(width, height))
 
 def win():
@@ -129,6 +135,14 @@ def lose():
     display_message('Level Failed!',700,100)
     message('YOU LOSE!!!')
     time.sleep(4)
+
+def hpbar(life, width, height, colour):
+    bar = '█ '
+    savehp = bar*life
+    font = pygame.font.SysFont("comicsansms", 25)
+    text=font.render(str(savehp),True,colour)
+    gameDisplay.blit(text,(width, height))
+    return
     
 #_________________________________________________________________Game Function______________________________________________________________#
 def game(display_width, graphics, plife, blife, player_width, blastx, blasty, blastspeed, boss_width, bossx, bossy, bossspeed, eggx, eggy, eggspeed):
@@ -152,16 +166,16 @@ def game(display_width, graphics, plife, blife, player_width, blastx, blasty, bl
 #|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||KeyBoard Controls||||||||||||||||||||||||||||||||||||||||||||||||||||||||||#
             if event.type == pygame.KEYDOWN:
                 if event.key == ord('a'):
-                    x_change = -10
+                    x_change = -20
                     graphics = 1
                 elif event.key == ord('d'):
-                    x_change = 10
+                    x_change = 20
                     graphics = 2
                 elif event.key == ord('w'):
-                    y_change = -10
+                    y_change = -20
                     graphics = 3
                 elif event.key == ord('s'):
-                    y_change = 10
+                    y_change = 20
                     graphics = 4
                 elif event.key == ord(' '):
                     graphics = 5
@@ -190,7 +204,7 @@ def game(display_width, graphics, plife, blife, player_width, blastx, blasty, bl
         elif y > (display_height) - player_height:
             y = (display_height) - player_height
 
-        gameDisplay.fill(white)
+        stage_background(0,0)
 
         if graphics == 0:
             player_stand(x,y)
@@ -217,9 +231,9 @@ def game(display_width, graphics, plife, blife, player_width, blastx, blasty, bl
         bossy += bossspeed
 
         if bossy > 400:
-            bossspeed = -15
+            bossspeed = -30
         if bossy < 0:
-            bossspeed = 15
+            bossspeed = 30
 
         eggy = (bossy + 100)
         boss_shoot(eggx,eggy)
@@ -247,12 +261,14 @@ def game(display_width, graphics, plife, blife, player_width, blastx, blasty, bl
                     quit()
                     
 
-        lifepoints(plife, 20, 10)
-        lifepoints(blife, 1275, 650)
+        lifepoints(plife, 20, 10, green)
+        hpbar(plife, 20, 50, green)
+        lifepoints(blife, 1200, 610, red)
+        hpbar(blife, 1200, 650, red)
         
         pygame.display.update()
 
-        clock.tick(60)
+        clock.tick(120)
 
 #______________________________________________________________Program Output_____________________________________________________________#
 while True:
