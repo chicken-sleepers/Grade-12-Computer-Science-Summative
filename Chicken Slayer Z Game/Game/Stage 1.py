@@ -19,19 +19,19 @@ pygame.display.set_caption('Chicken Slayer Z')
 clock = pygame.time.Clock()
 
 #**************************************************************Player Image*****************************************************************#
-playerstand = pygame.image.load('tahastand.png')
-playerright = pygame.image.load('taharight.png')
-playerleft = pygame.image.load('tahaleft.png')
-playerjump = pygame.image.load('tahajump.png')
-playercrouch = pygame.image.load('tahacrouch.png')
-playercharge = pygame.image.load('tahacharge.png')
-playershoot = pygame.image.load('tahashoot.png')
-energyblast = pygame.image.load('energyblast.png')
+playerstand = pygame.image.load('Player\tahastand.png')
+playerright = pygame.image.load('Player\taharight.png')
+playerleft = pygame.image.load('Player\tahaleft.png')
+playerjump = pygame.image.load('Player\tahajump.png')
+playercrouch = pygame.image.load('Player\tahacrouch.png')
+playercharge = pygame.image.load('Player\tahacharge.png')
+playershoot = pygame.image.load('Player\tahashoot.png')
+energyblast = pygame.image.load('Player\energyblast.png')
 stageimage = pygame.image.load('Backgrounds\stageone.png')
 
 #**************************************************************Enemy Image*******************************************************************#
-chickenboss = pygame.image.load('asadboss.png')
-bossshoot = pygame.image.load('eggblast.png')
+chickenboss = pygame.image.load('Bosses\asadboss.png')
+bossshoot = pygame.image.load('Bosses\eggblast.png')
 
 #**************************************************************Crash Music*******************************************************************#
 bombsound = pygame.mixer.Sound('Bomb_crash.wav')
@@ -248,7 +248,7 @@ def game(display_width, graphics, plife, blife, player_width, blastx, blasty, bl
                 blife -= 1
                 if blife <= 0:
                     win()
-                    pygame.quit()
+                    os.startfile('Stage 2.py')
                     quit()
  
         if x + player_width > eggx:
