@@ -59,7 +59,7 @@ eggwidth = 61
 eggheight = 46
 eggx = (display_width - boss_width - eggwidth)
 eggy = 0
-eggspeed = 40
+eggspeed = 20
 
 plife = 10
 blife = 11
