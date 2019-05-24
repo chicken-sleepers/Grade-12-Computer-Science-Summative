@@ -1,5 +1,5 @@
 #_________________________________________________________________Libraries_________________________________________________________________#
-import pygame,random,sys,time,os
+import pygame,random,sys,time,os, webbrowser
 from os import path
 
 #_____________________________________________________________Display Settings______________________________________________________________#
@@ -36,13 +36,13 @@ def game_file():
     os.startfile('Stage 1.py')
 
 def game_message():
-    os.startfile('message.py')
+    os.startfile('World Message.py')
 
 def game_references():
     os.startfile('references.py')
 
 def game_website():
-    os.startfile('Grade-12-Computer-Science-Summative\Chicken Slayer Z Website\index.html')
+    webbrowser.open('https://github.com/chicken-sleepers/Grade-12-Computer-Science-Summative')
 
 #_____________________________________________________________Interface Functions____________________________________________________________#
 def text_objects(text, font):
