@@ -30,7 +30,13 @@
 
 /* Position the "next button" to the right */
 .next {
-  right: -50;
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+/* Position the "next button" to the left */
+.prev {
+  left: 0;
   border-radius: 3px 0 0 3px;
 }
 
