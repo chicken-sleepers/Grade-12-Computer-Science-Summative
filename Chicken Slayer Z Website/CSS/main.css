@@ -10,7 +10,7 @@ body, html {
 .bgimg-1 {
   background-position: center;
   background-size: cover;
-  background-image: url("/Pictures/DisplayPicture.jpg");
+  background-image: url("../Pictures/DisplayPicture.jpg");
 >>>>>>> parent of a67b156... Update main.css
   min-height: 100%;
 }
