@@ -11,7 +11,7 @@ function currentSlide(n) {
   showSlides(slideIndex = n);
 }
 
-currentSlide(1);
+currentSlide(2);
 
 function showSlides(n) {
   var i;
