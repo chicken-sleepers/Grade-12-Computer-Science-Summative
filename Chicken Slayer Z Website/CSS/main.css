@@ -1,19 +1,9 @@
-<!DOCTYPE html> 
-<html>
-<head>
-<style>
-
 .bgimg-1 {
   background-position: center;
   background-size: cover;
   background-image: url("../Pictures/DisplayPicture.jpg");
->>>>>>> parent of a67b156... Update main.css
   min-height: 100%;
 }
 .w3-bar .w3-button {
   padding: 16px;
 }
-
-</style>
-</head>
-</html>
