@@ -251,55 +251,51 @@
 <div class="w3-container w3-center w3-dark-grey" style="padding:128px 16px" id="screenshots">
   <h3>SCREENSHOTS</h3>
   <p class="w3-large">What our game looks like</p>
-  <!-- Container for the image gallery -->
-  <div class="container">
+  <!-- Slideshow container -->
+  <div class="slideshow-container">
+  <div class="numbertext">1 / 4</div>
+  <img src="Pictures/MainMenuSS.JPG" style="width:100%">
+  <div class="text">Main Menu Screen</div>
 
-    <!-- Full-width images with number text -->
-    <div class="mySlides">
+    <!-- Full-width images with number and caption text -->
+    <div class="mySlides fade">
       <div class="numbertext">1 / 4</div>
-        <img src="Pictures/MainMenuSS.jpg" style="width:100%">
+      <img src="Pictures/MainMenuSS.JPG" style="width:100%">
+      <div class="text">Main Menu Screen</div>
     </div>
 
-    <div class="mySlides">
+    <div class="mySlides fade">
       <div class="numbertext">2 / 4</div>
-        <img src="Pictures/Stage1SS.jpg" style="width:100%">
+      <img src="Pictures/Stage1SS.JPG" style="width:100%">
+      <div class="text">Level 1</div>
     </div>
 
-    <div class="mySlides">
+    <div class="mySlides fade">
       <div class="numbertext">3 / 4</div>
-        <img src="Pictures/Stage2SS.jpg" style="width:100%">
+      <img src="Pictures/Stage2SS.JPG" style="width:100%">
+      <div class="text">Level 2</div>
     </div>
-
-    <div class="mySlides">
+    
+     <div class="mySlides fade">
       <div class="numbertext">4 / 4</div>
-        <img src="Pictures/Stage3SS.jpg" style="width:100%">
+      <img src="Pictures/Stage3SS.JPG" style="width:100%">
+      <div class="text">Level 3</div>
     </div>
 
     <!-- Next and previous buttons -->
     <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
     <a class="next" onclick="plusSlides(1)">&#10095;</a>
-
-    <!-- Image text -->
-    <div class="caption-container">
-      <p id="caption"></p>
-    </div>
-
-    <!-- Thumbnail images -->
-    <div class="row">
-      <div class="column">
-        <img class="demo cursor" src="Pictures/MainMenuSS.jpg" style="width:100%" onclick="currentSlide(1)" alt="Main Menu">
-      </div>
-      <div class="column"> 
-        <img class="demo cursor" src="Pictures/Stage1SS.jpg" style="width:100%" onclick="currentSlide(2)" alt="Stage 1">
-      </div>
-      <div class="column">
-        <img class="demo cursor" src="Pictures/Stage2SS.jpg" style="width:100%" onclick="currentSlide(3)" alt="Stage 2">
-      </div>
-      <div class="column">
-        <img class="demo cursor" src="Pictures/Stage3SS.jpg" style="width:100%" onclick="currentSlide(4)" alt="Stage 3">
-      </div>
-    </div>
   </div>
+  <br>
+
+  <!-- The dots/circles -->
+  <div style="text-align:center">
+    <span class="dot" onclick="currentSlide(1)"></span> 
+    <span class="dot" onclick="currentSlide(2)"></span> 
+    <span class="dot" onclick="currentSlide(3)"></span>
+    <span class="dot" onclick="currentSlide(4)"></span>
+  </div>
+</div>
 
 <!-- Storyline Section -->
 <div class="w3-container w3-light-grey" style="padding:128px 16px" id="storyline">
