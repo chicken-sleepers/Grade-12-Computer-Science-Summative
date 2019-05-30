@@ -11,5 +11,6 @@
   background-position: left;
   background-size: cover;
   background-image: url("../Pictures/WebsiteLogo.jpg");
-  min-height: 5rem
+  min-height: 5rem;
+  min-width: 5rem;
 }
