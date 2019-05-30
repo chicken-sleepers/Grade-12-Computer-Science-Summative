@@ -1,6 +1,13 @@
 var slideIndex = 1;
 showSlides(slideIndex);
 
+removeElement(document.getElementById("image_X"));
+
+//Remove Image
+function removeElement(ele) {
+    ele.parentNode.removeChild(ele);
+}
+
 // Next/previous controls
 function plusSlides(n) {
   showSlides(slideIndex += n);
