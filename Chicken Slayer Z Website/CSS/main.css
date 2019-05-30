@@ -7,3 +7,9 @@
 .w3-bar .w3-button {
   padding: 16px;
 }
+.lgimg-1{
+  background-position: left;
+  background-size: cover;
+  background-image: url("../Pictures/WebsiteLogo.jpg");
+  min-height: 10rem
+}
