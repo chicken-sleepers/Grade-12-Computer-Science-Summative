@@ -11,7 +11,7 @@ Group Members participating in this project:
 In this repository the project will be stored and constantly updated consisting of:
 - Website Links
   - Main website link
-  - (Insert link here)
+  -  https://chicken-sleepers.github.io/Grade-12-Computer-Science-Summative/
 - Python Game
   - Sprites
   - Music
