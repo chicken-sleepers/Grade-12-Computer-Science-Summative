@@ -42,7 +42,7 @@ def game_references():
     os.startfile('references.py')
 
 def game_website():
-    webbrowser.open('https://github.com/chicken-sleepers/Grade-12-Computer-Science-Summative')
+    webbrowser.open('https://chicken-sleepers.github.io/Grade-12-Computer-Science-Summative/')
 
 #_____________________________________________________________Interface Functions____________________________________________________________#
 def text_objects(text, font):
