@@ -1,7 +1,7 @@
 .bgimg-1 {
   background-position: center;
   background-size: cover;
-  background-image: url("Chicken Slayer Z Website/Pictures/DisplayPicture.jpg");
+  background-image: url("/Chicken Slayer Z Website/Pictures/DisplayPicture.jpg");
   min-height: 50rem;
 }
 .w3-bar .w3-button {
@@ -10,7 +10,7 @@
 .lgimg-1{
   background-position: left;
   background-size: contain;
-  background-image: url("Chicken Slayer Z Website/Pictures/WebsiteLogo.jpg");
+  background-image: url("/Chicken Slayer Z Website/Pictures/WebsiteLogo.jpg");
   min-height: 3rem;
 }
 .center {
