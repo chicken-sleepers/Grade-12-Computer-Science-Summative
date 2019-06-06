@@ -91,7 +91,7 @@ def button(msg,x,y,w,h,ic,ac,action=None):
                 quit()
             if action == "website":
                 game_website()
-                quit()
+
             if action == "quit":
                 pygame.quit()
                 quit()
