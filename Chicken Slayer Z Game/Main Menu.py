@@ -33,7 +33,7 @@ def instruc_file():
     os.startfile('Instructions.py')
 
 def game_file():
-    os.startfile('Stage 1.py')
+    os.startfile('Intro.py')
 
 def game_message():
     os.startfile('World Message.py')
