@@ -34,7 +34,7 @@ def control(x,y):
 
 #_________________________________________________________________File Functions_____________________________________________________________#
 def mainmenu_file():
-    os.startfile('Main Menu.py')
+    import Main_Menu
 #_____________________________________________________________Interface Functions____________________________________________________________#
 def text_objects(text, font):
     textSurface = font.render(text, True, white)
