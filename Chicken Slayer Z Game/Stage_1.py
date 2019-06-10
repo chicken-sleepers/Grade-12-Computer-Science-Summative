@@ -128,6 +128,7 @@ def win():
     gameDisplay.fill(white)
     display_message('Level Complete!',700,100)
     message('YOU WIN!!!')
+    import Anim_2
     time.sleep(4)
 
 def lose():
@@ -248,8 +249,8 @@ def game(display_width, graphics, plife, blife, player_width, blastx, blasty, bl
                 blife -= 1
                 if blife <= 0:
                     win()
-                    import Anim_2
-                    quit()
+                    
+                 
  
         if x + player_width > eggx:
             if y > eggy and y < eggy + eggheight or y + player_height > eggy and y + player_height < eggy + eggheight:
