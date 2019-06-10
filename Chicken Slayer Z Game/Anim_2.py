@@ -46,7 +46,7 @@ def main():
                 running = False
             if event.type == KEYDOWN:                                               #Exit game
                 if event.key == K_SPACE:
-                    import Stage_2                                        #Skips animation and goes to game
+                    os.startfile('Stage 2.py')                                        #Skips animation and goes to game
                     
 
                                                                                     #Plays the animation                
@@ -74,7 +74,7 @@ def main():
         elif story == 310:
             background = pygame.image.load("Pic_12.png")
         elif story == 315:
-             import Stage_2
+             os.startfile('Stage 2.py')
 
             
         
