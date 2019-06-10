@@ -13,6 +13,8 @@ from pygame.locals import *
 import sys       
 import os
 from os import path
+import pygame,random,sys,time,os, webbrowser
+from os import path
 
 def main():
     """main() -> Image
@@ -46,7 +48,7 @@ def main():
                 running = False
             if event.type == KEYDOWN:                                               #Exit game
                 if event.key == K_SPACE:
-                    import Stage_1                                        #Skips animation and goes to game
+                    os.startfile('Stage 1.py')                                       #Skips animation and goes to game
                     
 
                                                                                     #Plays the animation                
@@ -82,7 +84,7 @@ def main():
         elif story == 580:
             background = pygame.image.load("Frame_16.png")
         elif story == 585:
-             import Stage_1
+             os.startfile('Stage 1.py')
 
             
         
