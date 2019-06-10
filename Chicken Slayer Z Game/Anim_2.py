@@ -13,6 +13,7 @@ from pygame.locals import *
 import sys       
 import os
 from os import path
+import pygame,random,sys,time,os
 
 def main():
     """main() -> Image
