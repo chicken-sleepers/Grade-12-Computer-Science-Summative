@@ -30,16 +30,16 @@ def background_display(x,y):
 
 #_________________________________________________________________File Functions_____________________________________________________________#
 def instruc_file():
-    os.startfile('Instructions.py')
+    import Instructions
 
 def game_file():
     import Intro
 
 def game_message():
-    os.startfile('World Message.py')
+    import World_Message
 
 def game_references():
-    os.startfile('references.py')
+    import references
 
 def game_website():
     webbrowser.open('https://chicken-sleepers.github.io/Grade-12-Computer-Science-Summative/')
@@ -82,13 +82,13 @@ def button(msg,x,y,w,h,ic,ac,action=None):
                 
             if action == "instructions":
                 instruc_file()
-                quit()
+                
             if action == "worldmessage":
                 game_message()
-                quit()
+                
             if action == "references":
                 game_references()
-                quit()
+                
             if action == "website":
                 game_website()
 
