@@ -33,7 +33,7 @@ def instruc_file():
     os.startfile('Instructions.py')
 
 def game_file():
-    os.startfile('Intro.py')
+    import Intro
 
 def game_message():
     os.startfile('World Message.py')
@@ -79,7 +79,7 @@ def button(msg,x,y,w,h,ic,ac,action=None):
         if click[0] == 1 and action != None:
             if action == "play":
                 game_file()
-                quit()
+                
             if action == "instructions":
                 instruc_file()
                 quit()
