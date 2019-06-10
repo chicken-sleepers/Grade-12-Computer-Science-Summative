@@ -128,12 +128,14 @@ def win():
     gameDisplay.fill(white)
     display_message('Level Complete!',700,100)
     message('YOU WIN!!!')
+    import Main_Menu
     time.sleep(4)
 
 def lose():
     gameDisplay.fill(white)
     display_message('Level Failed!',700,100)
     message('YOU LOSE!!!')
+    import Main_Menu
     time.sleep(4)
 
 def hpbar(life, width, height, colour):
