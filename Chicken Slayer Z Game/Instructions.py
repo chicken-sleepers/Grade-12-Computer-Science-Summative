@@ -34,7 +34,7 @@ def control(x,y):
 
 #_________________________________________________________________File Functions_____________________________________________________________#
 def mainmenu_file():
-    os.startfile('Main Menu.py')
+    import Main_Menu
 #_____________________________________________________________Interface Functions____________________________________________________________#
 def text_objects(text, font):
     textSurface = font.render(text, True, white)
@@ -65,7 +65,7 @@ def button(msg,x,y,w,h,ic,ac,action=None):
         if click[0] == 1 and action != None:
             if action == "back":
                 mainmenu_file()
-                quit()
+                
             if action == "quit":
                 pygame.quit()
                 quit()
