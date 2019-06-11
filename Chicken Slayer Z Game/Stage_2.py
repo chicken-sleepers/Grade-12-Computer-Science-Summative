@@ -248,7 +248,7 @@ def game(display_width, graphics, plife, blife, player_width, blastx, blasty, bl
                 blife -= 1
                 if blife <= 0:
                     win()
-                    import Animation
+                    os.startfile('Animation.py')
                     quit()
  
         if x + player_width > eggx:

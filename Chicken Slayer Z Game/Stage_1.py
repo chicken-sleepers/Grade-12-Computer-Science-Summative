@@ -128,7 +128,7 @@ def win():
     gameDisplay.fill(white)
     display_message('Level Complete!',700,100)
     message('YOU WIN!!!')
-    import Anim_2
+    os.startfile("Anim_2.py")
     time.sleep(4)
 
 def lose():
@@ -249,6 +249,7 @@ def game(display_width, graphics, plife, blife, player_width, blastx, blasty, bl
                 blife -= 1
                 if blife <= 0:
                     win()
+                    quit()
                     
                  
  

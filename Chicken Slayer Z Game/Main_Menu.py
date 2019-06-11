@@ -30,16 +30,16 @@ def background_display(x,y):
 
 #_________________________________________________________________File Functions_____________________________________________________________#
 def instruc_file():
-    import Instructions
+    os.startfile('Instructions.py')
 
 def game_file():
-    import Intro
+    os.startfile('Intro.py')
 
 def game_message():
-    import World_Message
+    os.startfile('World_Message.py')
 
 def game_references():
-    import references
+    os.startfile('references.py')
 
 def game_website():
     webbrowser.open('https://chicken-sleepers.github.io/Grade-12-Computer-Science-Summative/')
@@ -79,18 +79,23 @@ def button(msg,x,y,w,h,ic,ac,action=None):
         if click[0] == 1 and action != None:
             if action == "play":
                 game_file()
+                quit()
                 
             if action == "instructions":
                 instruc_file()
+                quit()
                 
             if action == "worldmessage":
                 game_message()
+                quit()
                 
             if action == "references":
                 game_references()
+                quit()
                 
             if action == "website":
                 game_website()
+                quit()
 
             if action == "quit":
                 pygame.quit()
