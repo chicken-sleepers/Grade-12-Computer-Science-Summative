@@ -1,11 +1,9 @@
-#_________________________________________________________________Libraries_________________________________________________________________#
-import pygame,random,sys,time,os
-
-#_____________________________________________________________Display Settings______________________________________________________________#
+import pygame, time
 pygame.init()
 
-display_width = 1400
-display_height = 700
+#-----Display-----#
+win = pygame.display.set_mode((1400, 700))
+pygame.display.set_caption("Chicken Slayer Z")
 
 black = (0,0,0)
 white = (255,255,255)
@@ -13,92 +11,108 @@ red = (255,0,0)
 green = (0,255,0)
 blue = (0,0,255)
 
-#_______________________________________________________________Image/Music_________________________________________________________________#
-gameDisplay = pygame.display.set_mode((display_width,display_height))
-pygame.display.set_caption('Chicken Slayer Z')
+#-----Images-----#
+stageimage = pygame.image.load("Backgrounds/stagethree.png")
+moveRight = pygame.image.load("Player/taharights3.png")
+moveLeft = pygame.image.load("Player/tahalefts3.png")
+moveUp = pygame.image.load("Player/tahajumps3.png")
+moveDown = pygame.image.load("Player/tahacrouchs3.png")
+standing = pygame.image.load("Player/tahastands3.png")
+blast = pygame.image.load("Player/energyblasts3.png")
+ahmedboss = pygame.image.load("Bosses/Ahmedboss.png")
+eggblast = pygame.image.load("Bosses/eggblast.png")
+
 clock = pygame.time.Clock()
 
-#**************************************************************Player Image*****************************************************************#
-playerstand = pygame.image.load('Player\.tahastand.png')
-playerright = pygame.image.load('Player\.taharight.png')
-playerleft = pygame.image.load('Player\.tahaleft.png')
-playerjump = pygame.image.load('Player\.tahajump.png')
-playercrouch = pygame.image.load('Player\.tahacrouch.png')
-playercharge = pygame.image.load('Player\.tahacharge.png')
-playershoot = pygame.image.load('Player\.tahashoot.png')
-energyblast = pygame.image.load('Player\energyblast.png')
-stageimage = pygame.image.load('Backgrounds\stagethree.png')
+#-----Player-----#
+class player(object):
+    def __init__(self, x, y, width, height):
+        self.x = x
+        self.y = y
+        self.width = width
+        self.height= height
+        self.vel = 20
+        self.left = False
+        self.right = False
+        self.hitbox = (self.x, self.y, self.width, self.height)
+        self.life = 10
 
-#**************************************************************Enemy Image*******************************************************************#
-chickenboss = pygame.image.load('Bosses\Ahmedboss.png')
-bossshoot = pygame.image.load('Bosses\eggblast.png')
+    def draw(self, win):
+        if self.left:
+            win.blit(moveLeft, (self.x, self.y))
+        elif self.right:
+            win.blit(moveRight, (self.x, self.y))
+        else:
+            win.blit(standing, (self.x, self.y))
 
-#**************************************************************Crash Music*******************************************************************#
+        self.hitbox = (self.x, self.y, self.width, self.height)
+        pygame.draw.rect(win, (255, 0, 0), self.hitbox, 2)
 
+    def hit(self):
+        self.life -= 1
 
-#___________________________________________________________PreAssigned Variables____________________________________________________________#
-x = 0
-y = 0
-graphics = 0
-player_height = 260
-player_width = 218
+class player_projectile(object):
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+        self.vel = 50
 
-blastspeed = 80
-blastx = 0
-blasty = 0
-blastwidth = 142
-blastheight = 56
+    def draw(self, win):
+        win.blit(blast, (self.x, self.y))
 
-boss_height = 300
-boss_width = 333
-bossx = (display_width - boss_width)
-bossy = 0
-bossspeed = 15
+#-----Boss-----#
+class boss:
+    def __init__(self, x, y, width, height):
+        self.x = x
+        self.y = y
+        self.width = width
+        self.height = height
+        self.vel = 10
+        self.hitbox = (self.x, self.y, self.width, self.height)
+        self.life = 50
 
-eggwidth = 61
-eggheight = 46
-eggx = (display_width - boss_width - eggwidth)
-eggy = 0
-eggspeed = 30
+    def move(self):
+        self.y += self.vel
 
-plife = 10
-blife = 11
+    def draw(self, win):
+        self.move()
+        win.blit(ahmedboss, (self.x, self.y))
 
-#_________________________________________________________________Image Functions____________________________________________________________#
-def player_stand(x,y):
-    gameDisplay.blit(playerstand,(x,y))
+        self.hitbox = (self.x, self.y, self.width, self.height)
+        pygame.draw.rect(win, (255, 0, 0), self.hitbox, 2)
+
+    def hit(self):
+        self.life -= 1
+
+class boss_projectile(object):
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+        self.vel = -40
+
+    def draw(self, win):
+        win.blit(eggblast, (self.x, self.y))
+
+#-----Window Update-----#
+def redraw_window():
+    win.blit(stageimage, (0,0))
+    taha.draw(win)
+    ahmed.draw(win)
+
+    for energyblast in blast_list:
+        energyblast.draw(win)
+
+    for eggenergyblast in eggblast_list:
+        eggenergyblast.draw(win)
+
+    lifepoints(taha.life, 20, 10, green)
+    hpbar(taha.life, 20, 50, green)
+    lifepoints(ahmed.life, 1200, 610, red)
+    hpbar(ahmed.life, 1200, 650, red)
     
-def player_right(x,y):
-    gameDisplay.blit(playerright,(x,y))
+    pygame.display.update()
 
-def player_left(x,y):
-    gameDisplay.blit(playerleft,(x,y))
-
-def player_jump(x,y):
-    gameDisplay.blit(playerjump,(x,y))
-
-def player_crouch(x,y):
-    gameDisplay.blit(playercrouch,(x,y))
-
-def player_charge(x,y):
-    gameDisplay.blit(playercharge, (x,y))
-
-def player_shoot(x,y):
-    gameDisplay.blit(playershoot, (x,y))
-
-def energy_blast(x,y):
-    gameDisplay.blit(energyblast, (x,y))
-
-def boss(x,y):
-    gameDisplay.blit(chickenboss, (x,y))
-
-def boss_shoot(x,y):
-    gameDisplay.blit(bossshoot, (x,y))
-
-def stage_background(x,y):
-    gameDisplay.blit(stageimage, (x,y))
-
-#_____________________________________________________________Interface Functions____________________________________________________________#
+#-----User Interface-----#
 def text_objects(text, font):
     textSurface = font.render(text, True, red)
     return textSurface, textSurface.get_rect()
@@ -107,32 +121,32 @@ def display_message(message,x,y):
     Largetext = pygame.font.SysFont("comicsansbold", 60)
     TextSurf, TextRect = text_objects(message, Largetext)
     TextRect.center = (x, y)
-    gameDisplay.blit(TextSurf, TextRect)
+    win.blit(TextSurf, TextRect)
     pygame.display.update()
     time.sleep(0.1)
 
 def message(message):
     Largetext = pygame.font.SysFont("comicsansms", 30)
     TextSurf, TextRect = text_objects(message, Largetext)
-    TextRect.center = ((display_width/2), (display_height/2))
-    gameDisplay.blit(TextSurf, TextRect)
+    TextRect.center = ((1400/2), (700/2))
+    win.blit(TextSurf, TextRect)
     pygame.display.update()
     time.sleep(0.1)
 
 def lifepoints(life, width, height, colour):
     font = pygame.font.SysFont("comicsansms", 25)
     text=font.render('Health: '+str(life),True,colour)
-    gameDisplay.blit(text,(width, height))
+    win.blit(text,(width, height))
 
-def win():
-    gameDisplay.fill(white)
+def gamewin():
+    win.fill(white)
     display_message('Level Complete!',700,100)
     message('YOU WIN!!!')
     import Main_Menu
     time.sleep(4)
 
-def lose():
-    gameDisplay.fill(white)
+def gamelose():
+    win.fill(white)
     display_message('Level Failed!',700,100)
     message('YOU LOSE!!!')
     import Main_Menu
@@ -143,137 +157,101 @@ def hpbar(life, width, height, colour):
     savehp = bar*life
     font = pygame.font.SysFont("comicsansms", 25)
     text=font.render(str(savehp),True,colour)
-    gameDisplay.blit(text,(width, height))
+    win.blit(text,(width, height))
     return
+
+#-----mainloop-----#
+taha = player(50, 350, 60, 125)
+ahmed = boss (1000, 350, 260, 240)
+blast_list = []
+eggblast_list = []
+blast_reload = 0
+                 
+run = True
+while run:
+    clock.tick(120)
+
+    if blast_reload > 0:
+        blast_reload += 1
+    if blast_reload > 4:
+        blast_reload = 0
     
-#_________________________________________________________________Game Function______________________________________________________________#
-def game(display_width, graphics, plife, blife, player_width, blastx, blasty, blastspeed, boss_width, bossx, bossy, bossspeed, eggx, eggy, eggspeed):
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            run = False
+
+    for energyblast in blast_list:
+        if energyblast.y - 12 < ahmed.hitbox[1] + ahmed.hitbox[3] and energyblast.y + 12 > ahmed.hitbox[1]:
+            if energyblast.x + 35 > ahmed.hitbox[0] and energyblast.x - 35 < ahmed.hitbox[0] + ahmed.hitbox[2]:
+                ahmed.hit()
+                blast_list.pop(blast_list.index(energyblast))
+                
+        if energyblast.x < 1400:
+            energyblast.x += energyblast.vel
+        else:
+            blast_list.pop(blast_list.index(energyblast))
+
+    for eggenergyblast in eggblast_list:
+        if eggenergyblast.y - 20 < taha.hitbox[1] + taha.hitbox[3] and eggenergyblast.y + 20 > taha.hitbox[1]:
+            if eggenergyblast.x + 20 > taha.hitbox[0] and eggenergyblast.x - 20 < taha.hitbox[0] + taha.hitbox[2]:
+                taha.hit()
+                eggblast_list.pop(eggblast_list.index(eggenergyblast))
+                
+        if eggenergyblast.x > 0:
+            eggenergyblast.x += eggenergyblast.vel
+        else:
+            eggblast_list.pop(eggblast_list.index(eggenergyblast))
+                 
+    keys = pygame.key.get_pressed()
+
+    if keys[pygame.K_SPACE] and blast_reload == 0:
+        if len(blast_list) < 5:
+            blast_list.append(player_projectile(round(taha.x + taha.width // 2), round(taha.y + taha.width // 2)))
+
+        blast_reload = 1
     
-#-------------------------------------------------------Preassigned Game Loop Variables------------------------------------------------------#
-    x = (display_width * 0.10)
-    y = (display_height * 0.30)
+    if taha.right == True or taha.left == True:
+        taha.width = 105
+        taha.height = 80
+    else:
+        taha.width = 60
+        taha.height = 125
 
-    x_change = 0
-    y_change = 0
+    if keys[pygame.K_RIGHT] and taha.x < 700:
+        taha.x += taha.vel
+        taha.right = True
+        taha.left = False
+    elif keys[pygame.K_LEFT] and taha.x > taha.vel:
+        taha.x -= taha.vel
+        taha.left = True
+        taha.right = False
+    else:
+        taha.right = False
+        taha.left = False
+    if keys[pygame.K_UP] and taha.y > taha.vel:
+        taha.y -= taha.vel
+    if keys[pygame.K_DOWN] and taha.y < 550:
+        taha.y += taha.vel
 
-    exit_game = False
+    if ahmed.y > 700 - ahmed.height:
+        ahmed.vel = -10
 
-#-------------------------------------------------------------------Game Loop----------------------------------------------------------------#
-    while not exit_game:
+    if ahmed.y < 0:
+        ahmed.vel = 10
 
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                exit_game = True
+    if len(eggblast_list) < 1:
+        eggblast_list.append(boss_projectile(round(ahmed.x), round(ahmed.y + ahmed.width // 2)))
 
-#|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||KeyBoard Controls||||||||||||||||||||||||||||||||||||||||||||||||||||||||||#
-            if event.type == pygame.KEYDOWN:
-                if event.key == ord('a'):
-                    x_change = -20
-                    graphics = 1
-                elif event.key == ord('d'):
-                    x_change = 20
-                    graphics = 2
-                elif event.key == ord('w'):
-                    y_change = -20
-                    graphics = 3
-                elif event.key == ord('s'):
-                    y_change = 20
-                    graphics = 4
-                elif event.key == ord(' '):
-                    graphics = 5
+    if ahmed.life <= 0:
+        gamewin()
+        pygame.quit()
+        quit()
+    if taha.life <= 0:
+        gamelose()
+        pygame.quit()
+        quit()
 
-            if event.type == pygame.KEYUP:
-                if event.key == ord('a') or event.key == ord('d'):
-                    x_change = 0
-                    graphics = 0
-                if event.key == ord('w') or event.key == ord('s'):
-                    y_change = 0
-                    graphics = 0
-                if event.key == ord(' '):
-                    graphics = 6
+    redraw_window()
+    
+pygame.quit()
 
-#||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||Display Control|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||#
-        x += x_change
-        y += y_change
-
-        if x < 0:
-            x = 0
-        elif x > (display_width*0.4) - player_width:
-            x = (display_width*0.4) - player_width
-
-        if y < 0:
-            y = 0
-        elif y > (display_height) - player_height:
-            y = (display_height) - player_height
-
-        stage_background(0,0)
-
-        if graphics == 0:
-            player_stand(x,y)
-        elif graphics == 1:
-            player_left(x,y)
-        elif graphics == 2:
-            player_right(x,y)
-        elif graphics == 3:
-            player_jump(x,y)
-        elif graphics == 4:
-            player_crouch(x,y)
-        elif graphics == 5:
-            player_charge(x,y)
-        elif graphics == 6:
-            blastx = (x+232)
-            blasty = (y+63)
-            player_shoot(x,y)
-            graphics = 0
-            
-        energy_blast(blastx,blasty)
-        blastx += blastspeed
-
-        boss(bossx,bossy)
-        bossy += bossspeed
-
-        if bossy > 400:
-            bossspeed = -30
-        if bossy < 0:
-            bossspeed = 30
-
-        eggy = (bossy + 100)
-        boss_shoot(eggx,eggy)
-        eggx -= eggspeed
-
-        if eggx < 0:
-            eggx = (display_width - boss_width - eggwidth)
-
-        if bossx < blastx + blastwidth:
-            if bossy > blasty and bossy < blasty + blastheight or bossy + boss_height > blasty and bossy + boss_height < blasty + blastheight:
-                blasty = 1450
-                blife -= 1
-                if blife <= 0:
-                    win()
-                    pygame.quit()
-                    quit()
- 
-        if x + player_width > eggx:
-            if y > eggy and y < eggy + eggheight or y + player_height > eggy and y + player_height < eggy + eggheight:
-                eggx = (display_width - boss_width)
-                plife -= 1
-                if plife <= 0:
-                    lose()
-                    pygame.quit()
-                    quit()
-                    
-
-        lifepoints(plife, 20, 10, green)
-        hpbar(plife, 20, 50, green)
-        lifepoints(blife, 1200, 610, red)
-        hpbar(blife, 1200, 650, red)
-        
-        pygame.display.update()
-
-        clock.tick(120)
-
-#______________________________________________________________Program Output_____________________________________________________________#
-while True:
-    game(display_width, graphics, plife, blife, player_width, blastx, blasty, blastspeed, boss_width, bossx, bossy, bossspeed, eggx, eggy, eggspeed)
-    pygame.quit()
-    quit()
