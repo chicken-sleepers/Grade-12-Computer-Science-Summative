@@ -23,3 +23,7 @@ In this repository the project will be stored and constantly updated consisting 
 - Project Proposal & Group Assignments
 
 ![Gantt Diagram](https://github.com/chicken-sleepers/Grade-12-Computer-Science-Summative/blob/master/Gantt%20Chart.JPG)
+
+
+*IMPORTANT*
+To play the game, all the pictures in the animation folder need to be dragged into the same folder as main_menu.py
